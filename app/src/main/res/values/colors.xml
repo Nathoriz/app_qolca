@@ -8,4 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+    <color name="yellow">#F2E124</color>
+    <color name="pink_dark">#991744</color>
+    <color name="pink_light">#B98B9B</color>
+    <color name="pink_bright">#E50B59</color>
+
+    <color name="black_title">#292929</color>
+    <color name="gray_text2">#636161</color>
+    <color name="gray_text3">#9F9D9D</color>
+
 </resources>
