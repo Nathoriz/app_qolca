@@ -22,4 +22,8 @@
     <color name="gray_medium">#636161</color>
     <color name="gray_ligth">#9F9D9D</color>
 
+
+    <color name="light">#D2D2D2</color>
+    <color name="pink_pastel">#E8A0BA</color>
+
 </resources>
