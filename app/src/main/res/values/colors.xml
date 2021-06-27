@@ -14,6 +14,10 @@
     <color name="pink_light">#B98B9B</color>
     <color name="pink_bright">#E50B59</color>
 
+    <color name="blue_bright">#222EBE</color>
+    <color name="blue_pastel">#5DBAB1</color>
+    <color name="blue_dark">#171B40</color>
+
     <color name="black_title">#292929</color>
     <color name="gray_text2">#636161</color>
     <color name="gray_text3">#9F9D9D</color>

@@ -24,14 +24,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="415dp"
-        android:layout_height="422dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/container"
-        android:elevation="15dp"
+        android:elevation="5dp"
         android:orientation="vertical"
-        android:paddingLeft="32dp"
-        android:paddingTop="32dp"
-        android:paddingRight="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -84,14 +81,15 @@
             android:layout_marginBottom="32dp"
             android:ems="10"
             android:hint="*******************"
-            android:inputType="textPassword"
-            android:password="true" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32sp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/message"
             android:fontFamily="@font/poppins"
             android:text="Login"
