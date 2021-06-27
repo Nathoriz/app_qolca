@@ -7,16 +7,22 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="edu.pe.idat.app_qolca.view.ui.home.HomeFragment"
+        android:name="edu.pe.idat.app_qolca.view.HomeFragment"
+        android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="edu.pe.idat.app_qolca.view.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="edu.pe.idat.app_qolca.view.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="edu.pe.idat.app_qolca.view.ui.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="edu.pe.idat.app_qolca.view.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_user"
+        android:name="edu.pe.idat.app_qolca.view.UserFragment"
+        tools:layout="@layout/fragment_user" />
 </navigation>

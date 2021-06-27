@@ -1,4 +1,4 @@
-package edu.pe.idat.app_qolca;
+package edu.pe.idat.app_qolca.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

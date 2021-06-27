@@ -1,9 +1,11 @@
-package edu.pe.idat.app_qolca;
+package edu.pe.idat.app_qolca.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import edu.pe.idat.app_qolca.R;
 
 public class SplashActivity extends AppCompatActivity {
 
