@@ -1,4 +1,4 @@
-package edu.pe.idat.app_qolca.view.common;
+package edu.pe.idat.app_qolca.common;
 
 import android.app.Application;
 import android.content.Context;

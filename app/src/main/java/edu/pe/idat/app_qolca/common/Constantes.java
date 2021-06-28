@@ -1,4 +1,4 @@
-package edu.pe.idat.app_qolca.view.common;
+package edu.pe.idat.app_qolca.common;
 
 public class Constantes {
     private static String ipv="192.168.1.3";

@@ -3,7 +3,6 @@ package edu.pe.idat.app_qolca.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -20,8 +19,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.pe.idat.app_qolca.view.common.Constantes;
-import edu.pe.idat.app_qolca.view.common.SharedPreferenceManager;
+import edu.pe.idat.app_qolca.common.Constantes;
+import edu.pe.idat.app_qolca.common.SharedPreferenceManager;
 import edu.pe.idat.app_qolca.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

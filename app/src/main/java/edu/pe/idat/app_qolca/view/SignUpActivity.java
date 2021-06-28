@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.pe.idat.app_qolca.view.common.Constantes;
+import edu.pe.idat.app_qolca.common.Constantes;
 import edu.pe.idat.app_qolca.databinding.ActivitySignUpBinding;
 
 public class SignUpActivity extends AppCompatActivity {
