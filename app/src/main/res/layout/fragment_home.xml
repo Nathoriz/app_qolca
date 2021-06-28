@@ -41,5 +41,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_home_buscar" />
+        app:layout_constraintTop_toBottomOf="@+id/sv_home_buscar"
+        tools:listitem="@layout/producto_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>
