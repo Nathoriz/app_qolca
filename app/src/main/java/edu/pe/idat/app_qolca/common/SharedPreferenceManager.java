@@ -29,6 +29,12 @@ public class SharedPreferenceManager {
     public static Integer getSomeIntValue(String nombrePropiedad){
         return getSharedPreferences().getInt(nombrePropiedad,0);
     }
+
+    public static void clearValues(){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.clear();
+        editor.commit();
+    }
 }
 
 

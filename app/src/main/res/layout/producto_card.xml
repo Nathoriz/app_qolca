@@ -3,10 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvproduct"
-    android:layout_width="175dp"
+    android:layout_width="140dp"
     android:layout_height="280dp"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="16dp">
+    android:layout_marginStart="3dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginRight="3dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Cereal Copix Chocodadasdadasdadadasaa"
+                android:text="sssssssssshocodadssss1111"
                 android:textColor="#000000"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold" />
 
 

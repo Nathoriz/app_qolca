@@ -3,50 +3,93 @@ package edu.pe.idat.app_qolca.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import edu.pe.idat.app_qolca.R;
+import edu.pe.idat.app_qolca.adapter.CategoriaAdapter;
+import edu.pe.idat.app_qolca.common.Constantes;
+import edu.pe.idat.app_qolca.databinding.FragmentCategoryBinding;
+import edu.pe.idat.app_qolca.model.Categoria;
 
 
 public class CategoryFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private FragmentCategoryBinding binding;
+    private CategoriaAdapter adapter;
 
     public CategoryFragment() {
 
-    }
-
-
-
-    public static CategoryFragment newInstance(String param1, String param2) {
-        CategoryFragment fragment = new CategoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        binding = FragmentCategoryBinding.inflate(inflater,container,false);
+
+        adapter = new CategoriaAdapter(getContext());
+
+        binding.rvCategoria.setLayoutManager(new GridLayoutManager(getContext(),2));
+        binding.rvCategoria.setAdapter(adapter);
+        obtenerCategoria(Constantes.URL_API_CATEGORIA_LISTAR);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+
+    private void obtenerCategoria(String url) {
+        RequestQueue colaPeticiones = Volley.newRequestQueue(getContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ArrayList<Categoria> categorias = new ArrayList<>();
+                        for (int i = 0; i <response.length(); i++){
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                Categoria categoria = new Categoria(
+                                        jsonObject.getInt("id"),
+                                        jsonObject.getString("nombre"));
+                                categorias.add(categoria);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        adapter.addCategoria(categorias);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        colaPeticiones.add(jsonArrayRequest);
     }
 }
