@@ -107,7 +107,7 @@
             android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_Rcrear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -118,7 +118,6 @@
             android:text="Registrarse"
             android:textSize="16sp"
             android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

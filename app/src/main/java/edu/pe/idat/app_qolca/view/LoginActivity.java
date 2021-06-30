@@ -35,8 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         binding.btnLogin.setOnClickListener(view -> {
+
+
             autentificacion();
             binding.btnLogin.setEnabled(true);
+
 
         });
 
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         });
+
     }
 
     private void autentificacion() {
