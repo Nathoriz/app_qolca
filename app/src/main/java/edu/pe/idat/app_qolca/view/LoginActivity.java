@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject user = response.getJSONObject("Usuario");
                                 SharedPreferenceManager.setSomeIntValue(Constantes.PREF_ID,user.getInt("id"));
                                 SharedPreferenceManager.setSomeStringValue(Constantes.PREF_NOMBRE,user.getString("nombre"));
+                                SharedPreferenceManager.setSomeStringValue(Constantes.PREF_APELLIDO,user.getString("apellido"));
                                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             }else {
                                 mensaje(response.getString("Mensaje"));

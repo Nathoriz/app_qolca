@@ -14,5 +14,6 @@ public class Constantes {
 
     public static final String PREF_ID="PREF_ID";
     public static final String PREF_NOMBRE="PREF_NOMBRE";
+    public static final String PREF_APELLIDO="PREF_APELLIDO";
 }
 

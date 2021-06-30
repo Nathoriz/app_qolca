@@ -24,8 +24,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="415dp"
-        android:layout_height="392dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/container"
         android:elevation="5dp"
         android:orientation="vertical"

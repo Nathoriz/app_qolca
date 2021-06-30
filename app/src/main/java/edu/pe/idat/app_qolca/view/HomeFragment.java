@@ -1,5 +1,6 @@
 package edu.pe.idat.app_qolca.view;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import edu.pe.idat.app_qolca.R;
 import edu.pe.idat.app_qolca.adapter.ProductoAdapter;
 import edu.pe.idat.app_qolca.common.Constantes;
+import edu.pe.idat.app_qolca.common.SharedPreferenceManager;
 import edu.pe.idat.app_qolca.databinding.FragmentHomeBinding;
 import edu.pe.idat.app_qolca.model.Producto;
 
@@ -54,6 +56,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         binding.rvProductos.setAdapter(adapter);
         obtenerProducto(Constantes.URL_API_PRODUCTO_LISTAR);
         binding.svHomeBuscar.setOnQueryTextListener(this);
+
+        binding.bienvenida.setText(binding.bienvenida.getText() +
+                " "+
+                SharedPreferenceManager.getSomeStringValue("PREF_NOMBRE"));
+
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
