@@ -41,59 +41,16 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         binding.btnRcrear.setOnClickListener(view -> {
-
-
-            if(registrarUsuario(Constantes.URL_API_USUARIO_CREAR)){
-                mostrarAlerta("Registro","Usuario creado exitoso");
-            }
-
-                String msj = "";
-                boolean respuesta = true;
-                if (binding.etSignupNombre.getText().toString().length() == 0) {
-                    msj = "Ingrese el nombre";
-                    respuesta = false;
-                    mostrarAlerta("Nombre", msj);
-
-                } else if (binding.etSignupApellido.getText().toString().length() == 0) {
-                    msj = "Ingrese su apellido";
-                    respuesta = false;
-                    mostrarAlerta("Apellido", msj);
-                } else if (binding.etSignupEmail.getText().toString().length() == 0) {
-                    msj = "Ingrese su email";
-                    respuesta = false;
-                    mostrarAlerta("Email", msj);
-                } else if (binding.etSignupEmail.getText().toString().length() > 0) {
-                    Pattern pattern = Patterns.EMAIL_ADDRESS;
-                    if (pattern.matcher(binding.etSignupEmail.getText().toString()).matches()) {
-                        respuesta = true;
-                    } else {
-                        msj = "Su email " + binding.etSignupEmail.getText().toString() + " no es valido";
-                        respuesta = false;
-                        mostrarAlerta("correo", msj);
-                    }
-                } else if (binding.etSignupContrasena.getText().toString().length() == 0) {
-                    msj = "Ingrese su correo";
-                    respuesta = false;
-                    mostrarAlerta("Email", msj);
-                } else if (binding.etSignupContrasena.getText().toString().length() > 0) {
-                    Pattern pattern = Patterns.EMAIL_ADDRESS;
-                    if (pattern.matcher(binding.etSignupContrasena.getText().toString()).matches()) {
-                        respuesta = true;
-                    } else {
-                        msj = "Su contraseña" + binding.etSignupContrasena.getText().toString() + " no es valido";
-                        respuesta = false;
-                        mostrarAlerta("contraseña", msj);
-                    }
-                } else {
-                    respuesta = true;
+            if(validar()){
+                if(registrarUsuario(Constantes.URL_API_USUARIO_CREAR)){
+                     mostrarAlerta("Registro","Usuario creado exitoso");
+                        binding.btnRcrear.setEnabled(true);
+                }else{
+                    mostrarAlerta("Ups","Hubo un error");
+                    binding.btnRcrear.setEnabled(true);
                 }
-
-
-
-
-
+        }
         });
-
         binding.tvSignupLogin.setOnClickListener(view -> {
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
         });
@@ -109,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean registrarUsuario(String urlApiUsuarioCrear) {
         RequestQueue colapeticiones = Volley.newRequestQueue(this);
-        boolean rsp=false;
+        boolean rsp = true;
         binding.btnRcrear.setEnabled(false);
 
        Map<String,String> parametros= new HashMap<>();
@@ -118,7 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
         parametros.put("email",binding.etSignupEmail.getText().toString());
         parametros.put("contrasenia",binding.etSignupContrasena.getText().toString());
 
-        rsp=true;
         JSONObject jsonObjectParametro = new JSONObject(parametros);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -127,7 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -135,13 +90,55 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
 
-
-
         });
         colapeticiones.add(request);
         return rsp;
     }
 
+
+    private boolean validar(){
+        String msj = "";
+        boolean respuesta = true;
+        if (binding.etSignupNombre.getText().toString().length() == 0) {
+            msj = "Ingrese el nombre";
+            respuesta = false;
+            mostrarAlerta("Nombre", msj);
+
+        } else if (binding.etSignupApellido.getText().toString().length() == 0) {
+            msj = "Ingrese su apellido";
+            respuesta = false;
+            mostrarAlerta("Apellido", msj);
+        } else if (binding.etSignupEmail.getText().toString().length() == 0) {
+            msj = "Ingrese su email";
+            respuesta = false;
+            mostrarAlerta("Email", msj);
+        } else if (binding.etSignupEmail.getText().toString().length() > 0) {
+            Pattern pattern = Patterns.EMAIL_ADDRESS;
+            if (pattern.matcher(binding.etSignupEmail.getText().toString()).matches()) {
+                respuesta = true;
+            } else {
+                msj = "Su email " + binding.etSignupEmail.getText().toString() + " no es valido";
+                respuesta = false;
+                mostrarAlerta("correo", msj);
+            }
+        } else if (binding.etSignupContrasena.getText().toString().length() == 0) {
+            msj = "Ingrese su correo";
+            respuesta = false;
+            mostrarAlerta("Email", msj);
+        } else if (binding.etSignupContrasena.getText().toString().length() > 0) {
+            Pattern pattern = Patterns.EMAIL_ADDRESS;
+            if (pattern.matcher(binding.etSignupContrasena.getText().toString()).matches()) {
+                respuesta = true;
+            } else {
+                msj = "Su contraseña" + binding.etSignupContrasena.getText().toString() + " no es valido";
+                respuesta = false;
+                mostrarAlerta("contraseña", msj);
+            }
+        } else {
+            respuesta = true;
+        }
+        return respuesta;
+    }
 
 
     private void mensaje(String m){
