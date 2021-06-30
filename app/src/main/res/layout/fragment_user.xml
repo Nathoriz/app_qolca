@@ -177,7 +177,7 @@
         android:layout_width="137dp"
         android:layout_height="36dp"
         android:layout_marginTop="64dp"
-        android:background="@drawable/button"
+        android:background="@drawable/shape_button"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="Cerrar Sesión"

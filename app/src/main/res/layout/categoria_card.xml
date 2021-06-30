@@ -4,10 +4,12 @@
     android:id="@+id/cvcategoria"
     android:layout_width="140dp"
     android:layout_height="140dp"
+    android:layout_marginBottom="16dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="10dp">
 
     <LinearLayout
+        android:id="@+id/ll_categoria"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -22,7 +24,7 @@
             android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="Abararotes"
-            android:textColor="@color/blue_dark"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 

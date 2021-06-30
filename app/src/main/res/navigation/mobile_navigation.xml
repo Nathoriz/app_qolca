@@ -25,4 +25,9 @@
         android:id="@+id/navigation_user"
         android:name="edu.pe.idat.app_qolca.view.UserFragment"
         tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/detalleproductofrag"
+        android:name="edu.pe.idat.app_qolca.view.DetalleProductoFragment"
+        android:label="fragment_detalle_producto"
+        tools:layout="@layout/fragment_detalle_producto" />
 </navigation>

@@ -88,7 +88,7 @@
                             app:tint="@color/white" />
 
                         <TextView
-                            android:id="@+id/tv_cart_cantidad"
+                            android:id="@+id/tv_detailproduct_cantidad"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -100,7 +100,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:id="@+id/iv_cart_incrementar"
+                            android:id="@+id/iv_detailproduct_incrementar"
                             android:layout_width="27dp"
                             android:layout_height="27dp"
                             android:background="@drawable/shape_icon_circle_yellow"

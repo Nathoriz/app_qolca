@@ -11,15 +11,20 @@
         android:name=".common.MyApp"
         android:supportsRtl="true"
         android:theme="@style/Theme.App_qolca">
-        <activity android:name=".view.SignUpActivity"></activity>
-        <activity android:name=".view.LoginActivity" >
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".view.SignUpActivity">
+
         </activity>
-        <activity android:name=".view.SplashActivity" > </activity>
+        <activity android:name=".view.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.SplashActivity">
+
+        </activity>
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name" android:windowSoftInputMode="adjustPan">
