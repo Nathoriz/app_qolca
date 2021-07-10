@@ -31,12 +31,14 @@ import edu.pe.idat.app_qolca.adapter.ProductoAdapter;
 import edu.pe.idat.app_qolca.common.Constantes;
 import edu.pe.idat.app_qolca.common.SharedPreferenceManager;
 import edu.pe.idat.app_qolca.databinding.FragmentHomeBinding;
+import edu.pe.idat.app_qolca.model.Categoria;
 import edu.pe.idat.app_qolca.model.Producto;
+import edu.pe.idat.app_qolca.model.Subcategoria;
 
 import static androidx.navigation.Navigation.findNavController;
 
 
-public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener, ProductoAdapter.RecyclerItemClick {
 
     private FragmentHomeBinding binding;
     private ProductoAdapter adapter;
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
-        adapter = new ProductoAdapter(getContext());
+        adapter = new ProductoAdapter(getContext(), this::itemClick);
 
         binding.rvProductos.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rvProductos.setAdapter(adapter);
@@ -61,23 +63,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 " "+
                 SharedPreferenceManager.getSomeStringValue("PREF_NOMBRE"));
 
-
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                list = adapter.getCartProduct();
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelableArrayList("data", list);
-//                getParentFragmentManager().setFragmentResult("productdata", bundle);
-//                findNavController(view).navigate(R.id.detalleproductofrag);
-
-                DetalleProductoFragment fragment = new DetalleProductoFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
         return binding.getRoot();
     }
 
@@ -95,6 +80,12 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                         for (int i = 0; i <response.length(); i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
+                                JSONObject jsonObjectSubcategoria = jsonObject.getJSONObject("subcategoria");
+                                JSONObject jsonObjectCategoria = jsonObjectSubcategoria.getJSONObject("categoria");
+
+                                Categoria categoria = new Categoria(jsonObjectCategoria.getInt("id"),jsonObjectCategoria.getString("nombre"));
+                                Subcategoria subcategoria = new Subcategoria(jsonObjectSubcategoria.getInt("id"),jsonObjectSubcategoria.getString("nombre"),categoria);
+
                                 Producto producto = new Producto(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("nombre"),
@@ -102,7 +93,8 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                                         jsonObject.getString("marca"),
                                         jsonObject.getDouble("precio"),
                                         jsonObject.getString("urlImg"),
-                                        jsonObject.getInt("stock"));
+                                        jsonObject.getInt("stock"),
+                                        subcategoria);
                                 productos.add(producto);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -133,6 +125,12 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                         for (int i = 0; i <response.length(); i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
+                                JSONObject jsonObjectSubcategoria = jsonObject.getJSONObject("subcategoria");
+                                JSONObject jsonObjectCategoria = jsonObjectSubcategoria.getJSONObject("categoria");
+
+                                Categoria categoria = new Categoria(jsonObjectCategoria.getInt("id"),jsonObjectCategoria.getString("nombre"));
+                                Subcategoria subcategoria = new Subcategoria(jsonObjectSubcategoria.getInt("id"),jsonObjectSubcategoria.getString("nombre"),categoria);
+
                                 Producto producto = new Producto(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("nombre"),
@@ -140,7 +138,8 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                                         jsonObject.getString("marca"),
                                         jsonObject.getDouble("precio"),
                                         jsonObject.getString("urlImg"),
-                                        jsonObject.getInt("stock"));
+                                        jsonObject.getInt("stock"),
+                                        subcategoria);
                                 productos.add(producto);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -168,10 +167,22 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         adapter.filter(newText);
         return false;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void itemClick(Producto p) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idproduct", p.getId());
+        getParentFragmentManager().setFragmentResult("ID", bundle);
+
+        DetalleProductoFragment fragment = new DetalleProductoFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

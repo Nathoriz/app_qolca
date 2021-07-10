@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Producto implements Parcelable {
+public class Producto {
     private int id;
     private String nombre;
     private String descripcion;
@@ -14,8 +14,9 @@ public class Producto implements Parcelable {
     private double precio;
     private String imagen;
     private int stock;
+    private Subcategoria subcategoria;
 
-    public Producto(int id, String nombre, String descripcion, String marca, double precio, String imagen, int stock) {
+    public Producto(int id, String nombre, String descripcion, String marca, double precio, String imagen, int stock, Subcategoria subcategoria) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -23,29 +24,8 @@ public class Producto implements Parcelable {
         this.precio = precio;
         this.imagen = imagen;
         this.stock = stock;
+        this.subcategoria = subcategoria;
     }
-
-    protected Producto(Parcel in) {
-        id = in.readInt();
-        nombre = in.readString();
-        descripcion = in.readString();
-        marca = in.readString();
-        precio = in.readDouble();
-        imagen = in.readString();
-        stock = in.readInt();
-    }
-
-    public static final Creator<Producto> CREATOR = new Creator<Producto>() {
-        @Override
-        public Producto createFromParcel(Parcel in) {
-            return new Producto(in);
-        }
-
-        @Override
-        public Producto[] newArray(int size) {
-            return new Producto[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -103,19 +83,11 @@ public class Producto implements Parcelable {
         this.stock = stock;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Subcategoria getSubcategoria() {
+        return subcategoria;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(nombre);
-        dest.writeString(descripcion);
-        dest.writeString(marca);
-        dest.writeDouble(precio);
-        dest.writeString(imagen);
-        dest.writeInt(stock);
+    public void setSubcategoria(Subcategoria subcategoria) {
+        this.subcategoria = subcategoria;
     }
 }

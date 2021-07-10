@@ -31,12 +31,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private ArrayList<Producto> originalList;
     private View.OnClickListener listener;
 
+    private RecyclerItemClick itemClick;
 
-    public ProductoAdapter(Context context){
+
+    public ProductoAdapter(Context context, RecyclerItemClick itemClick){
         this.context = context;
         list = new ArrayList<>();
         this.originalList = new ArrayList<>();
         originalList.addAll(list);
+        this.itemClick = itemClick;
     }
 
     @NonNull
@@ -46,7 +49,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ProductoCardBinding recyclerBinding = ProductoCardBinding.inflate(layoutInflater,parent,false);
 
-        recyclerBinding.getRoot().setOnClickListener(this);
+//        recyclerBinding.getRoot().setOnClickListener(this);
 
         return new ProductoAdapter.ViewHolder(recyclerBinding);
     }
@@ -61,7 +64,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
         holder.recyclerBinding.tvItemPrecio.setText(String.valueOf(item.getPrecio()));
         Glide.with(context).load(item.getImagen()).into(holder.recyclerBinding.ivProductoImagen);
-        holder.recyclerBinding.cvproduct.setOnClickListener(this);
+//        holder.recyclerBinding.cvproduct.setOnClickListener(this);
+
+        holder.recyclerBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClick.itemClick(item);
+            }
+        });
     }
 
     @Override
@@ -78,6 +88,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     public void setOnClickListener(View.OnClickListener listener){
         this.listener = listener;
+    }
+
+    public interface RecyclerItemClick{
+        void itemClick(Producto p);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
