@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.widget.Toast;
 
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -41,20 +43,16 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         binding.btnRcrear.setOnClickListener(view -> {
-            if(validar()){
-                if(registrarUsuario(Constantes.URL_API_USUARIO_CREAR)){
-                     mostrarAlerta("Registro","Usuario creado exitoso");
-                        binding.btnRcrear.setEnabled(true);
-                }else{
-                    mostrarAlerta("Ups","Hubo un error");
-                    binding.btnRcrear.setEnabled(true);
-                }
-        }
+                registrarUsuario(Constantes.URL_API_USUARIO_CREAR);
+                binding.btnRcrear.setEnabled(true);
+                clear();
         });
+
         binding.tvSignupLogin.setOnClickListener(view -> {
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
         });
     }
+
     public void mostrarAlerta(String titulo, String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(mensaje)
@@ -64,9 +62,8 @@ public class SignUpActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private boolean registrarUsuario(String urlApiUsuarioCrear) {
+    private void registrarUsuario(String urlApiUsuarioCrear) {
         RequestQueue colapeticiones = Volley.newRequestQueue(this);
-        boolean rsp = true;
         binding.btnRcrear.setEnabled(false);
 
        Map<String,String> parametros= new HashMap<>();
@@ -83,68 +80,38 @@ public class SignUpActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        try {
+                            mostrarAlerta("Wiiiii :D",response.getString("Mensaje"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null && networkResponse.data != null) {
+                    byte[] datos = networkResponse.data;
+                    try {
+                        JSONObject testV=new JSONObject(new String(datos));
+                        mostrarAlerta("Ups (◕︵◕)",testV.getString("message"));
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }
             }
 
         });
         colapeticiones.add(request);
-        return rsp;
     }
 
-
-    private boolean validar(){
-        String msj = "";
-        boolean respuesta = true;
-        if (binding.etSignupNombre.getText().toString().length() == 0) {
-            msj = "Ingrese el nombre";
-            respuesta = false;
-            mostrarAlerta("Nombre", msj);
-
-        } else if (binding.etSignupApellido.getText().toString().length() == 0) {
-            msj = "Ingrese su apellido";
-            respuesta = false;
-            mostrarAlerta("Apellido", msj);
-        } else if (binding.etSignupEmail.getText().toString().length() == 0) {
-            msj = "Ingrese su email";
-            respuesta = false;
-            mostrarAlerta("Email", msj);
-        } else if (binding.etSignupEmail.getText().toString().length() > 0) {
-            Pattern pattern = Patterns.EMAIL_ADDRESS;
-            if (pattern.matcher(binding.etSignupEmail.getText().toString()).matches()) {
-                respuesta = true;
-            } else {
-                msj = "Su email " + binding.etSignupEmail.getText().toString() + " no es valido";
-                respuesta = false;
-                mostrarAlerta("correo", msj);
-            }
-        } else if (binding.etSignupContrasena.getText().toString().length() == 0) {
-            msj = "Ingrese su correo";
-            respuesta = false;
-            mostrarAlerta("Email", msj);
-        } else if (binding.etSignupContrasena.getText().toString().length() > 0) {
-            Pattern pattern = Patterns.EMAIL_ADDRESS;
-            if (pattern.matcher(binding.etSignupContrasena.getText().toString()).matches()) {
-                respuesta = true;
-            } else {
-                msj = "Su contraseña" + binding.etSignupContrasena.getText().toString() + " no es valido";
-                respuesta = false;
-                mostrarAlerta("contraseña", msj);
-            }
-        } else {
-            respuesta = true;
-        }
-        return respuesta;
+    public void clear(){
+        binding.etSignupNombre.setText("");
+        binding.etSignupApellido.setText("");
+        binding.etSignupEmail.setText("");
+        binding.etSignupContrasena.setText("");
     }
-
-
-    private void mensaje(String m){
-        Toast.makeText(getApplicationContext(),
-                m,Toast.LENGTH_LONG).show();
-    }
-
 }
 

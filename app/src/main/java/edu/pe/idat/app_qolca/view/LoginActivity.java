@@ -2,6 +2,7 @@ package edu.pe.idat.app_qolca.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                         } catch (JSONException ex) {
-                            mensaje(ex.toString() + ":'C");
+                            mostrarAlerta("⊙︿⊙",ex.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     byte[] datos = networkResponse.data;
                     try {
                         JSONObject testV=new JSONObject(new String(datos));
-                        Toast.makeText(getApplicationContext(),testV.getString("message"),Toast.LENGTH_LONG).show();
+                        mostrarAlerta("Ups (◕︵◕)",testV.getString("message"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -107,8 +108,17 @@ public class LoginActivity extends AppCompatActivity {
         colapeticiones.add(request);
     }
 
-    private void mensaje(String m){
-        Toast.makeText(getApplicationContext(),
-                m,Toast.LENGTH_LONG).show();
+    public void mostrarAlerta(String titulo, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(mensaje)
+                .setTitle(titulo);
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void clear(){
+        binding.etLoginEmail.setText("");
+        binding.etLoginContrasenia.setText("");
     }
 }
