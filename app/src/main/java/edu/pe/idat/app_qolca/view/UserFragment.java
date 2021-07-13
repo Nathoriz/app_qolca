@@ -1,9 +1,11 @@
 package edu.pe.idat.app_qolca.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,33 +22,8 @@ public class UserFragment extends Fragment {
 
     private FragmentUserBinding binding;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
     public UserFragment() {
 
-    }
-
-
-    public static UserFragment newInstance(String param1, String param2) {
-        UserFragment fragment = new UserFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -62,21 +39,34 @@ public class UserFragment extends Fragment {
         binding.tvUserApellido.setText(apellido);
         binding.tvUserInciales.setText(Character.toString(nombre.charAt(0))+Character.toString(apellido.charAt(0)));
 
-
-        binding.btnUserLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferenceManager.clearValues();
-//                mensaje("Adiós " + nombre+", vuelva pronto :)");
-                startActivity(new Intent(getContext(),LoginActivity.class));
-            }
+        binding.btnUserLogout.setOnClickListener(view ->{
+            logout();
         });
-
+        binding.lyUserEdit.setOnClickListener(view->{
+            EditUserFragment fragment = new EditUserFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+        binding.lyUserEditpass.setOnClickListener(view->{
+            EditPasswordFragment fragment = new EditPasswordFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
         return binding.getRoot();
     }
 
-    private void mensaje(String m){
-        Toast.makeText(getContext(),
-                m,Toast.LENGTH_LONG).show();
+    private void logout(){
+        SharedPreferenceManager.clearValues();
+        startActivity(new Intent(getContext(),LoginActivity.class));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

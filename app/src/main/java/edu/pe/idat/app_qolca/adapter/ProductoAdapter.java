@@ -25,12 +25,10 @@ import java.util.stream.Collectors;
 import edu.pe.idat.app_qolca.databinding.ProductoCardBinding;
 import edu.pe.idat.app_qolca.model.Producto;
 
-public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder> implements View.OnClickListener {
+public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder>{
     private Context context;
     private ArrayList<Producto> list;
     private ArrayList<Producto> originalList;
-    private View.OnClickListener listener;
-
     private RecyclerItemClick itemClick;
 
 
@@ -49,8 +47,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ProductoCardBinding recyclerBinding = ProductoCardBinding.inflate(layoutInflater,parent,false);
 
-//        recyclerBinding.getRoot().setOnClickListener(this);
-
         return new ProductoAdapter.ViewHolder(recyclerBinding);
     }
 
@@ -64,7 +60,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
         holder.recyclerBinding.tvItemPrecio.setText(String.valueOf(item.getPrecio()));
         Glide.with(context).load(item.getImagen()).into(holder.recyclerBinding.ivProductoImagen);
-//        holder.recyclerBinding.cvproduct.setOnClickListener(this);
 
         holder.recyclerBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,16 +74,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         return list.size();
     }
 
-    @Override
-    public void onClick(View v) {
-        if(listener!= null){
-            listener.onClick(v);
-        }
-    }
-
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener = listener;
-    }
 
     public interface RecyclerItemClick{
         void itemClick(Producto p);
@@ -105,10 +90,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public void addProducto(ArrayList<Producto> data) {
         list.addAll(data);
         notifyDataSetChanged();
-    }
-
-    public ArrayList<Producto> getCartProduct() {
-        return originalList;
     }
 
     public void filter(final String strSearch){

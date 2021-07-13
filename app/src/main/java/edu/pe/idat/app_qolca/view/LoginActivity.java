@@ -39,20 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         binding.btnLogin.setOnClickListener(view -> {
-
-
             autentificacion();
             binding.btnLogin.setEnabled(true);
-
-
         });
-
         binding.tvLoginRegistrar.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
-
-
         });
-
     }
 
     private void autentificacion() {
@@ -82,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                         } catch (JSONException ex) {
-                            mostrarAlerta("⊙︿⊙",ex.toString());
+                            boxMessage("⊙︿⊙",ex.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -94,11 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                     byte[] datos = networkResponse.data;
                     try {
                         JSONObject testV=new JSONObject(new String(datos));
-                        mostrarAlerta("Ups (◕︵◕)",testV.getString("message"));
+                        boxMessage("Ups (◕︵◕)",testV.getString("message"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                        boxMessage("⊙︿⊙",e.toString());
                     }
 
                 }
@@ -108,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         colapeticiones.add(request);
     }
 
-    public void mostrarAlerta(String titulo, String mensaje) {
+    public void boxMessage(String titulo, String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(mensaje)
                 .setTitle(titulo);

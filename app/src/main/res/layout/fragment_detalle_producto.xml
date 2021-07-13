@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_ligth"
     tools:context=".view.DetalleProductoFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/shape_detail_product"
         android:elevation="4dp"
         android:orientation="vertical"
         android:padding="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,15 +28,16 @@
             android:text="TextView"
             android:textAllCaps="false"
             android:textColor="@color/black_title"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_detailproduct_img"
             android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_heart" />
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_loading" />
     </LinearLayout>
 
     <TextView
@@ -46,32 +49,36 @@
         android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <TextView
-        android:id="@+id/tv_detailproduct_precio"
+    <Button
+        android:id="@+id/btn_detailproduct_comprar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins"
-        android:text="S/3.00"
+        android:background="@drawable/shape_button"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:text="COMPRAR"
         android:textColor="@color/black_title"
-        android:textSize="25sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detailproduct_marca" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_detailproduct_cart" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_detailproduct_precio">
 
@@ -109,26 +116,33 @@
         android:id="@+id/iv_detailproduct_cart"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         app:srcCompat="@drawable/ic_cartrounded" />
 
-    <Button
-        android:id="@+id/btn_detailproduct_comprar"
+    <TextView
+        android:id="@+id/tv_detailproduct_precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_button"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
-        android:text="COMPRAR"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins"
+        android:text="S/3.00"
         android:textColor="@color/black_title"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:backgroundTint="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detailproduct_cart" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detailproduct_marca" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="337dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

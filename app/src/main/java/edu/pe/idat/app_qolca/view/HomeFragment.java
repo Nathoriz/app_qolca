@@ -51,9 +51,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
-
         adapter = new ProductoAdapter(getContext(), this::itemClick);
-
         binding.rvProductos.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rvProductos.setAdapter(adapter);
         obtenerProducto(Constantes.URL_API_PRODUCTO_LISTAR);
@@ -66,53 +64,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         return binding.getRoot();
     }
 
-
     private void obtenerProducto(String url) {
-        RequestQueue colaPeticiones = Volley.newRequestQueue(getContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        ArrayList<Producto> productos = new ArrayList<>();
-                        for (int i = 0; i <response.length(); i++){
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                JSONObject jsonObjectSubcategoria = jsonObject.getJSONObject("subcategoria");
-                                JSONObject jsonObjectCategoria = jsonObjectSubcategoria.getJSONObject("categoria");
-
-                                Categoria categoria = new Categoria(jsonObjectCategoria.getInt("id"),jsonObjectCategoria.getString("nombre"));
-                                Subcategoria subcategoria = new Subcategoria(jsonObjectSubcategoria.getInt("id"),jsonObjectSubcategoria.getString("nombre"),categoria);
-
-                                Producto producto = new Producto(
-                                        jsonObject.getInt("id"),
-                                        jsonObject.getString("nombre"),
-                                        jsonObject.getString("descripcion"),
-                                        jsonObject.getString("marca"),
-                                        jsonObject.getDouble("precio"),
-                                        jsonObject.getString("urlImg"),
-                                        jsonObject.getInt("stock"),
-                                        subcategoria);
-                                productos.add(producto);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        adapter.addProducto(productos);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-        colaPeticiones.add(jsonArrayRequest);
-    }
-
-    private void obtenerBusquedaProducto(String url) {
         RequestQueue colaPeticiones = Volley.newRequestQueue(getContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -161,16 +113,12 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String newText) {
-        obtenerBusquedaProducto(Constantes.URL_API_PRODUCTO_BUSCAR+newText);
+        obtenerProducto(Constantes.URL_API_PRODUCTO_BUSCAR+newText);
         adapter.filter(newText);
         return false;
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     @Override
@@ -185,4 +133,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }

@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Email"
+            android:text="@string/tv_email"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Contraseña"
+            android:text="@string/tv_contrasenia"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 

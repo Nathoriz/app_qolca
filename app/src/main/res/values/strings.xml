@@ -4,6 +4,14 @@
     <string name="title_category">Categorias</string>
     <string name="title_cart">Carrito</string>
     <string name="title_user">Perfil</string>
+    <string name="title_edituser">Perfil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_contrasenia">Contraseña</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_nombre">Nombre</string>
+    <string name="tv_apellido">Apellido</string>
+    <string name="tv_direccion">Dirección</string>
+    <string name="tv_numero">Número</string>
+    <string name="tv_confirmar_contrasenia">Confirmar contraseña</string>
 </resources>

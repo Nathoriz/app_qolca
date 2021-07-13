@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
@@ -51,15 +50,6 @@ public class SignUpActivity extends AppCompatActivity {
         binding.tvSignupLogin.setOnClickListener(view -> {
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
         });
-    }
-
-    public void mostrarAlerta(String titulo, String mensaje) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(mensaje)
-                .setTitle(titulo);
-
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private void registrarUsuario(String urlApiUsuarioCrear) {
@@ -81,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            mostrarAlerta("Wiiiii :D",response.getString("Mensaje"));
+                            boxMessage("Wiiiii :D",response.getString("mensaje"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -94,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                     byte[] datos = networkResponse.data;
                     try {
                         JSONObject testV=new JSONObject(new String(datos));
-                        mostrarAlerta("Ups (◕︵◕)",testV.getString("message"));
+                        boxMessage("Ups (◕︵◕)",testV.getString("message"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -112,6 +102,15 @@ public class SignUpActivity extends AppCompatActivity {
         binding.etSignupApellido.setText("");
         binding.etSignupEmail.setText("");
         binding.etSignupContrasena.setText("");
+    }
+
+    public void boxMessage(String titulo, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(mensaje)
+                .setTitle(titulo);
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
 

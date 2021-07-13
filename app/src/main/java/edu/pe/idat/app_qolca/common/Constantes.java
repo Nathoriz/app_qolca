@@ -5,6 +5,9 @@ public class Constantes {
 
     public static final String URL_API_USUARIO_CREAR="http://"+ipv+":8050/usuario/signup";
     public static final String URL_API_USUARIO_LOGIN="http://"+ipv+":8050/usuario/login";
+    public static final String URL_API_USUARIO_ID="http://"+ipv+":8050/usuario/";
+    public static final String URL_API_USUARIO_EDIT="http://"+ipv+":8050/usuario/modificar/";
+    public static final String URL_API_USUARIO_EDIT_PASS="http://"+ipv+":8050/usuario/changepassword/";
 
 
     public static final String URL_API_CATEGORIA_LISTAR=" http://"+ipv+":8050/categoria/listar";

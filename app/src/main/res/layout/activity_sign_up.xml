@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:fontFamily="@font/poppins"
             android:text="Registro"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black_title"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Nombre"
+            android:text="@string/tv_nombre"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Apellido"
+            android:text="@string/tv_apellido"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Email"
+            android:text="@string/tv_email"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Contraseña"
+            android:text="@string/tv_contrasenia"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 
