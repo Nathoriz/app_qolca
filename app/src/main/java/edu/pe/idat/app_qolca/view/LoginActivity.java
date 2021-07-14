@@ -65,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            if(response.getString("mensaje").equals("Credenciales válidas")){
-                                JSONObject user = response.getJSONObject("Usuario");
+                            if(response.getString("message").equals("Credenciales válidas")){
+                                JSONObject user = response.getJSONObject("usuario");
                                 SharedPreferenceManager.setSomeIntValue(Constantes.PREF_ID,user.getInt("id"));
                                 SharedPreferenceManager.setSomeStringValue(Constantes.PREF_NOMBRE,user.getString("nombre"));
                                 SharedPreferenceManager.setSomeStringValue(Constantes.PREF_APELLIDO,user.getString("apellido"));

@@ -55,9 +55,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void registrarUsuario(String urlApiUsuarioCrear) {
         RequestQueue colapeticiones = Volley.newRequestQueue(this);
         binding.btnRcrear.setEnabled(false);
-
-       Map<String,String> parametros= new HashMap<>();
-       parametros.put("nombre",binding.etSignupNombre.getText().toString());
+        Map<String,String> parametros= new HashMap<>();
+        parametros.put("nombre",binding.etSignupNombre.getText().toString());
         parametros.put("apellido",binding.etSignupApellido.getText().toString());
         parametros.put("email",binding.etSignupEmail.getText().toString());
         parametros.put("contrasenia",binding.etSignupContrasena.getText().toString());
@@ -71,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            boxMessage("Wiiiii :D",response.getString("mensaje"));
+                            boxMessage("Wiiiii :D",response.getString("message"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

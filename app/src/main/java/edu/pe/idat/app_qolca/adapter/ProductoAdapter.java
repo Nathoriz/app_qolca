@@ -61,11 +61,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         holder.recyclerBinding.tvItemPrecio.setText(String.valueOf(item.getPrecio()));
         Glide.with(context).load(item.getImagen()).into(holder.recyclerBinding.ivProductoImagen);
 
-        holder.recyclerBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClick.itemClick(item);
-            }
+        holder.recyclerBinding.getRoot().setOnClickListener(view ->{
+            itemClick.itemClick(item);
         });
     }
 

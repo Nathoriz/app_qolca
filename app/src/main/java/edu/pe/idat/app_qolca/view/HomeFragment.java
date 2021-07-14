@@ -1,5 +1,6 @@
 package edu.pe.idat.app_qolca.view;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -95,6 +96,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                                 productos.add(producto);
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                boxMessage("⊙︿⊙",e.toString());
                             }
                         }
                         adapter.addProducto(productos);
@@ -134,10 +136,18 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         transaction.commit();
     }
 
+    public void boxMessage(String titulo, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(mensaje)
+                .setTitle(titulo);
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

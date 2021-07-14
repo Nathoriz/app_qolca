@@ -107,8 +107,8 @@ public class EditPasswordFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.getString("mensaje").equals("Su contraseña se actualizo")){
-                                boxMessage("Wiiiii :D",response.getString("mensaje"));
+                            if(response.getString("message").equals("Su contraseña se actualizo")){
+                                boxMessage("Wiiiii :D",response.getString("message"));
                             }
                         } catch (JSONException ex) {
                             boxMessage("⊙︿⊙",ex.toString());

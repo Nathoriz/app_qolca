@@ -50,7 +50,6 @@ public class EditUserFragment extends Fragment {
         obtenerDatos(Constantes.URL_API_USUARIO_ID+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
         binding.btnEdituserGuardar.setOnClickListener(view->{
             actualizarDatos(Constantes.URL_API_USUARIO_EDIT+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
-            obtenerDatos(Constantes.URL_API_USUARIO_ID+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
         });
         return binding.getRoot();
     }
@@ -74,6 +73,8 @@ public class EditUserFragment extends Fragment {
                                     response.getString("numero"),
                                     response.getString("contrasenia"),
                                     response.getString("estado"));
+                            SharedPreferenceManager.setSomeStringValue("PREF_NOMBRE",usuario.getNombre());
+                            SharedPreferenceManager.setSomeStringValue("PREF_APELLIDO",usuario.getApellido());
                             setInformacion(usuario);
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
@@ -94,7 +95,6 @@ public class EditUserFragment extends Fragment {
                                 e.printStackTrace();
                                 boxMessage("⊙︿⊙",e.toString());
                             }
-
                         }
                     }
                 });
@@ -102,10 +102,6 @@ public class EditUserFragment extends Fragment {
     }
 
     public void setInformacion(Usuario usuario){
-//        binding.etEdituserNombre.setHint(usuario.getNombre());
-//        binding.etEdituserApellido.setHint(usuario.getApellido());
-//        binding.etEdituserDireccion.setHint(usuario.getDireccion());
-//        binding.etEdituserNumero.setHint(usuario.getNumero());
         binding.etEdituserNombre.setText(usuario.getNombre());
         binding.etEdituserApellido.setText(usuario.getApellido());
         binding.etEdituserDireccion.setText(usuario.getDireccion());
@@ -144,11 +140,12 @@ public class EditUserFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.getString("mensaje").equals("Sus datos se actualizaron correctamente")){
-                               boxMessage("Wiiiii :D",response.getString("mensaje"));
+                            if(response.getString("message").equals("Sus datos se actualizaron correctamente")){
+                               boxMessage("Wiiiii :D",response.getString("message"));
+                               obtenerDatos(Constantes.URL_API_USUARIO_ID+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
                             }
                         } catch (JSONException ex) {
-                            boxMessage("⊙︿⊙",ex.toString());
+                            boxMessage("⊙︿⊙ -",ex.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -171,13 +168,6 @@ public class EditUserFragment extends Fragment {
         });
         colapeticiones.add(request);
     }
-
-//    public void clear(){
-//        binding.etEdituserNombre.setText("");
-//        binding.etEdituserApellido.setText("");
-//        binding.etEdituserDireccion.setText("");
-//        binding.etEdituserNumero.setText("");
-//    }
 
     public void boxMessage(String titulo, String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
