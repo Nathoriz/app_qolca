@@ -62,8 +62,6 @@ public class PedidoFragment extends Fragment {
     private int cantidad;
     private int idproducto;
 
-
-
     public PedidoFragment() {
 
     }
@@ -380,7 +378,7 @@ public class PedidoFragment extends Fragment {
         );
         colapeticiones.add(request);
     }
-    
+
     private void clear(){
         binding.etPedidoNombre.setText("");
         binding.etPedidoDireccion.setText("");

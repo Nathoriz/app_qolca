@@ -3,12 +3,12 @@ package edu.pe.idat.app_qolca.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,8 +30,7 @@ import edu.pe.idat.app_qolca.databinding.FragmentCategoryBinding;
 import edu.pe.idat.app_qolca.model.Categoria;
 
 
-public class CategoryFragment extends Fragment {
-
+public class CategoryFragment extends Fragment implements CategoriaAdapter.RecyclerItemClick{
     private FragmentCategoryBinding binding;
     private CategoriaAdapter adapter;
 
@@ -45,7 +44,7 @@ public class CategoryFragment extends Fragment {
 
         binding = FragmentCategoryBinding.inflate(inflater,container,false);
 
-        adapter = new CategoriaAdapter(getContext());
+        adapter = new CategoriaAdapter(getContext(), this::itemClick);
 
         binding.rvCategoria.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rvCategoria.setAdapter(adapter);
@@ -58,7 +57,6 @@ public class CategoryFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 
     private void obtenerCategoria(String url) {
         RequestQueue colaPeticiones = Volley.newRequestQueue(getContext());
@@ -91,5 +89,19 @@ public class CategoryFragment extends Fragment {
                     }
                 });
         colaPeticiones.add(jsonArrayRequest);
+    }
+
+    @Override
+    public void itemClick(Categoria c) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", c.getId());
+        bundle.putString("nombre", c.getNombre());
+        getParentFragmentManager().setFragmentResult("key", bundle);
+
+        ProductosCategoriaFragment fragment = new ProductosCategoriaFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+//        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

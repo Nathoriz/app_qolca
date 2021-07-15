@@ -9,12 +9,17 @@ public class Constantes {
     public static final String URL_API_USUARIO_EDIT="http://"+ipv+":8050/usuario/modificar/";
     public static final String URL_API_USUARIO_EDIT_PASS="http://"+ipv+":8050/usuario/changepassword/";
 
-
     public static final String URL_API_CATEGORIA_LISTAR="http://"+ipv+":8050/categoria/listar";
+    public static final String URL_API_SUBCATEGORIA_CATEGORIA="http://"+ipv+":8050/subcategoria/listar/";
 
     public static final String URL_API_PRODUCTO_LISTAR="http://"+ipv+":8050/producto/listar";
     public static final String URL_API_PRODUCTO_BUSCAR="http://"+ipv+":8050/producto/buscar?nombre=";
     public static final String URL_API_PRODUCTO_ID="http://"+ipv+":8050/producto/";
+
+    public static final String URL_API_PRODUCTO_CATEGORIA="http://"+ipv+":8050/producto/categoria/";
+    public static final String URL_API_PRODUCTO_SUBCATEGORIA="http://"+ipv+":8050/producto/subcategoria/";
+    public static final String URL_API_PRODUCTO_CATEGORIA_BUSCAR="http://"+ipv+":8050/producto/buscar/categoria/";
+    public static final String URL_API_PRODUCTO_SUBCATEGORIA_BUSCAR="http://"+ipv+":8050/producto/buscar/subcategoria/";
 
     public static final String URL_API_CARRITO_ID="http://"+ipv+":8050/carrito/";
 

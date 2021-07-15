@@ -16,15 +16,18 @@ import java.util.Random;
 
 import edu.pe.idat.app_qolca.databinding.CategoriaCardBinding;
 import edu.pe.idat.app_qolca.model.Categoria;
+import edu.pe.idat.app_qolca.model.Producto;
 
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Categoria> list;
+    private CategoriaAdapter.RecyclerItemClick itemClick;
 
-    public CategoriaAdapter(Context context){
+    public CategoriaAdapter(Context context, CategoriaAdapter.RecyclerItemClick itemClick){
         this.context = context;
         list = new ArrayList<>();
+        this.itemClick = itemClick;
     }
 
     @NonNull
@@ -46,6 +49,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
                         (random.nextInt(256) + random.nextInt(256)) / 2,
                         (random.nextInt(256) + random.nextInt(256)) / 2)
         );
+        holder.recyclerBinding.getRoot().setOnClickListener(view ->{
+            itemClick.itemClick(item);
+        });
     }
 
     @Override
@@ -66,5 +72,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
         notifyDataSetChanged();
     }
 
-
+    public interface RecyclerItemClick{
+        void itemClick(Categoria c);
+    }
 }

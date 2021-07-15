@@ -31,10 +31,10 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Categorias"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/poppins"
-            android:text="Categorias"
             android:textColor="@color/black_title"
             android:textSize="20dp" />
     </LinearLayout>
