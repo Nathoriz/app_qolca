@@ -39,11 +39,11 @@ import edu.pe.idat.app_qolca.model.Subcategoria;
 public class ProductosSubcategoriaFragment extends Fragment implements SearchView.OnQueryTextListener, ProductoAdapter.RecyclerItemClick {
 
     FragmentProductosSubcategoriaBinding binding;
-    private ProductoAdapter productoAdapter;
-    private int idCategoria;
-    private String nombreCategoria;
-    private int idSubcategoria;
-    private String nombreSubcategoria;
+    private ProductoAdapter adapter;
+    public int idCategoria;
+    public String nombreCategoria;
+    public int idSubcategoria;
+    public String nombreSubcategoria;
 
     public ProductosSubcategoriaFragment() {
     }
@@ -52,17 +52,18 @@ public class ProductosSubcategoriaFragment extends Fragment implements SearchVie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProductosSubcategoriaBinding.inflate(inflater,container,false);
-        productoAdapter = new ProductoAdapter(getContext(),this::itemClick);
+        adapter = new ProductoAdapter(getContext(),this::itemClick);
         binding.rvSubcategoriaproductos.setLayoutManager(new GridLayoutManager(getContext(),2));
-        binding.rvSubcategoriaproductos.setAdapter(productoAdapter);
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+        binding.rvSubcategoriaproductos.setAdapter(adapter);
+        getParentFragmentManager().setFragmentResultListener("data", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle result) {
+
                 idSubcategoria = result.getInt("id_subcategoria");
                 nombreSubcategoria = result.getString("nombre_subcategoria");
                 idCategoria = result.getInt("id_categoria");
                 nombreCategoria = result.getString("nombre_categoria");
-
+                
                 binding.tvSubcategoriaproductosCategoria.setText(nombreCategoria);
                 binding.tvCategoriaproductosSubcategoria.setText(nombreSubcategoria);
 
@@ -121,7 +122,7 @@ public class ProductosSubcategoriaFragment extends Fragment implements SearchVie
                                 boxMessage("⊙︿⊙",e.toString());
                             }
                         }
-                        productoAdapter.addProducto(productos);
+                        adapter.addProducto(productos);
                     }
                 },
                 new Response.ErrorListener() {
@@ -141,7 +142,7 @@ public class ProductosSubcategoriaFragment extends Fragment implements SearchVie
     @Override
     public boolean onQueryTextChange(String newText) {
         obtenerProductos(Constantes.URL_API_PRODUCTO_SUBCATEGORIA_BUSCAR+idSubcategoria+"?nombre="+newText);
-        productoAdapter.filter(newText);
+        adapter.filter(newText);
         return false;
     }
 

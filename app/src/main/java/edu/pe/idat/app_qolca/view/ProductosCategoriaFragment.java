@@ -45,8 +45,8 @@ public class ProductosCategoriaFragment extends Fragment implements SearchView.O
     FragmentProductosCategoriaBinding binding;
     private SubcategoriaAdapter subcategoriaAdapter;
     private ProductoAdapter productoAdapter;
-    private int idCategoria;
-    private String nombreCategoria;
+    public int idCategoria;
+    public String nombreCategoria;
 
 
     public ProductosCategoriaFragment() {
@@ -193,7 +193,7 @@ public class ProductosCategoriaFragment extends Fragment implements SearchView.O
         bundle.putString("nombre_subcategoria", s.getNombre());
         bundle.putInt("id_categoria", s.getCategoria().getId());
         bundle.putString("nombre_categoria", s.getCategoria().getNombre());
-        getParentFragmentManager().setFragmentResult("key", bundle);
+        getParentFragmentManager().setFragmentResult("data", bundle);
 
         ProductosSubcategoriaFragment fragment = new ProductosSubcategoriaFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
