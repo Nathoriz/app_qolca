@@ -91,6 +91,7 @@ public class PedidoFragment extends Fragment {
         binding.btnPedidoRealizarpedido.setOnClickListener(view ->{
             if(rsp.equals("cart")){
                 crearPedidoComprarTodo(Constantes.URL_API_PEDIDO_COMPRAR_TODO);
+
             }else if(rsp.equals("producto")){
                 crearPedidoComprar(Constantes.URL_API_PEDIDO_COMPRAR+"cantidad="+cantidad+"&idproducto="+idproducto);
             }else {
@@ -112,6 +113,8 @@ public class PedidoFragment extends Fragment {
             binding.ivPedidoUp.setVisibility(View.VISIBLE);
             view.setVisibility(View.GONE);
         });
+
+
         return binding.getRoot();
     }
 
@@ -261,6 +264,9 @@ public class PedidoFragment extends Fragment {
                         try {
                             if(response.getString("message").equals("ok")){
                                borrarProductosCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DELETE_ALL+id_user);
+                                Intent intent = new Intent(getContext(),PagoSynapsisActivity.class);
+                                intent.putExtra("idpedido",response.getInt("id"));
+                                startActivity(intent);
                             }
                         } catch (JSONException ex) {
                             boxMessage("⊙︿⊙",ex.toString());
@@ -349,8 +355,9 @@ public class PedidoFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getString("message").equals("ok")){
-                                //REDIRIGIR A LA VISTA DE PAGO
-                                boxMessage("O.O","Si compra un producto");
+                                Intent intent = new Intent(getContext(),PagoSynapsisActivity.class);
+                                intent.putExtra("idpedido",response.getInt("id"));
+                                startActivity(intent);
                             }
                         } catch (JSONException ex) {
                             boxMessage("⊙︿⊙",ex.toString());
