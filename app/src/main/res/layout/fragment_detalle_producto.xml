@@ -8,7 +8,7 @@
     tools:context=".view.DetalleProductoFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/ly_pedido_detallepedido"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/shape_detail_product"

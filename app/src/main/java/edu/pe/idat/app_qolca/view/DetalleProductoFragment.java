@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.pe.idat.app_qolca.R;
 import edu.pe.idat.app_qolca.common.Constantes;
 import edu.pe.idat.app_qolca.common.SharedPreferenceManager;
 import edu.pe.idat.app_qolca.databinding.FragmentDetalleProductoBinding;
@@ -68,7 +70,17 @@ public class DetalleProductoFragment extends Fragment {
             aniadirCarrito(Constantes.URL_API_CARRITOPRODUCTOS_CREAR);
         });
         binding.btnDetailproductComprar.setOnClickListener(view ->{
-            //FALTA
+            Bundle bundle = new Bundle();
+            bundle.putString("message", "producto");
+            bundle.putInt("idproducto",producto.getId());
+            bundle.putInt("cantidad",Integer.valueOf(binding.tvDetailproductCantidad.getText().toString()));
+            getParentFragmentManager().setFragmentResult("key", bundle);
+
+            PedidoFragment fragment = new PedidoFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
         return binding.getRoot();
@@ -215,10 +227,6 @@ public class DetalleProductoFragment extends Fragment {
 
         });
         colapeticiones.add(request);
-    }
-
-    private void comprarProducto(String url){
-        //FALTA
     }
 
     public void boxMessage(String titulo, String mensaje) {

@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 import edu.pe.idat.app_qolca.R;
 import edu.pe.idat.app_qolca.adapter.CarritoProductoAdapter;
-import edu.pe.idat.app_qolca.adapter.ProductoAdapter;
 import edu.pe.idat.app_qolca.common.Constantes;
 import edu.pe.idat.app_qolca.common.SharedPreferenceManager;
 import edu.pe.idat.app_qolca.databinding.CartCardBinding;
@@ -60,6 +59,16 @@ public class CartFragment extends Fragment implements CarritoProductoAdapter.Rec
         binding.rvCartproducts.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvCartproducts.setAdapter(adapter);
         obtenerProductosCarrito(Constantes.URL_API_CARRITOPRODUCTOS_LISTAR+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
+        binding.btnCarritoComprar.setOnClickListener(view ->{
+            Bundle bundle = new Bundle();
+            bundle.putString("message", "cart");
+            getParentFragmentManager().setFragmentResult("key", bundle);
+
+            PedidoFragment fragment = new PedidoFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment_activity_main,fragment);
+            transaction.commit();
+        });
         return binding.getRoot();
     }
 

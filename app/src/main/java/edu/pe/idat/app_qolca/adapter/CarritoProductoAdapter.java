@@ -83,10 +83,6 @@ public class CarritoProductoAdapter extends RecyclerView.Adapter<CarritoProducto
         notifyDataSetChanged();
     }
 
-//    public interface RecyclerItemClick{
-//        void itemClick(CarritoProducto cp, ImageView img);
-//    }
-
     public interface RecyclerItemClick{
         void itemClick(CarritoProducto cp, ImageView img,CartCardBinding cardBinding);
     }

@@ -14,4 +14,6 @@
     <string name="tv_direccion">Dirección</string>
     <string name="tv_numero">Número</string>
     <string name="tv_confirmar_contrasenia">Confirmar contraseña</string>
+    <string name="tv_load">Loading</string>
+    <string name="tv_cantidad">Cant.</string>
 </resources>

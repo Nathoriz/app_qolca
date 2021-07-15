@@ -14,9 +14,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-
-        android:fontFamily="@font/poppins"
         android:text="Bienvenido de nuevo"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/black_title"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -51,8 +50,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
             android:text="@string/tv_email"
+            android:fontFamily="@font/roboto"
             android:textColor="@color/black_title"
             android:textSize="18sp" />
 

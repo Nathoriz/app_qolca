@@ -101,7 +101,7 @@ public class EditPasswordFragment extends Fragment {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.PUT,
-                url + "?contrasenia="+ contrasenia,
+                url+"?contrasenia="+contrasenia,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override

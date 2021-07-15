@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
     private FragmentHomeBinding binding;
     private ProductoAdapter adapter;
-    private ArrayList<Producto> list;
     public HomeFragment() {
 
     }
@@ -61,7 +60,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         binding.bienvenida.setText(binding.bienvenida.getText() +
                 " "+
                 SharedPreferenceManager.getSomeStringValue("PREF_NOMBRE"));
-
         return binding.getRoot();
     }
 

@@ -39,17 +39,17 @@ public class EditUserFragment extends Fragment {
 
     private FragmentEditUserBinding binding;
     private Usuario usuario;
-
-    public EditUserFragment() {
-    }
+    private String id_user = SharedPreferenceManager.getSomeIntValue("PREF_ID").toString();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEditUserBinding.inflate(inflater,container,false);
-        obtenerDatos(Constantes.URL_API_USUARIO_ID+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
+        obtenerDatos(Constantes.URL_API_USUARIO_ID+id_user);
         binding.btnEdituserGuardar.setOnClickListener(view->{
-            actualizarDatos(Constantes.URL_API_USUARIO_EDIT+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
+            if(validacion()){
+                actualizarDatos(Constantes.URL_API_USUARIO_EDIT+id_user);
+            }
         });
         return binding.getRoot();
     }
@@ -111,62 +111,52 @@ public class EditUserFragment extends Fragment {
     private void actualizarDatos(String url){
         RequestQueue colapeticiones = Volley.newRequestQueue(getContext());
 
-        String nombre = binding.etEdituserNombre.getText().toString();
-        String apellido = binding.etEdituserApellido.getText().toString();
-        String direccion = binding.etEdituserDireccion.getText().toString();
-        String numero = binding.etEdituserNumero.getText().toString();
-
-        if(nombre.isEmpty() || nombre.equals("") || nombre == null){
-            nombre = usuario.getNombre();
-        }
-        if(apellido.isEmpty() || apellido.equals("") || apellido == null){
-            apellido = usuario.getApellido();
-        }
-        if(direccion.isEmpty() || direccion.equals("") || direccion == null){
-            direccion = usuario.getDireccion();
-        }
-        if(numero.isEmpty() || numero.equals("") || numero == null){
-            numero = usuario.getNumero();
-        }
-
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.PUT,
-                url + "?apellido="+ apellido.toLowerCase()+
-                        "&direccion=" + direccion.toLowerCase()+
-                        "&name=" + nombre.toLowerCase()+
-                        "&numero=" + numero,
+                url+"?apellido="+binding.etEdituserApellido.getText().toString()+
+                        "&direccion="+binding.etEdituserDireccion.getText().toString()+
+                        "&nombre="+binding.etEdituserNombre.getText().toString()+
+                        "&numero="+binding.etEdituserNumero.getText().toString(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.getString("message").equals("Sus datos se actualizaron correctamente")){
                                boxMessage("Wiiiii :D",response.getString("message"));
-                               obtenerDatos(Constantes.URL_API_USUARIO_ID+ SharedPreferenceManager.getSomeIntValue("PREF_ID").toString());
-                            }
+                               obtenerDatos(Constantes.URL_API_USUARIO_ID + id_user);
                         } catch (JSONException ex) {
-                            boxMessage("⊙︿⊙ -",ex.toString());
+                            boxMessage("⊙︿⊙ ",ex.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse networkResponse = error.networkResponse;
-
                 if (networkResponse != null && networkResponse.data != null) {
                     byte[] datos = networkResponse.data;
                     try {
                         JSONObject testV=new JSONObject(new String(datos));
                         boxMessage("Ups (◕︵◕)",testV.getString("message"));
-
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        boxMessage("⊙︿⊙",e.toString());
+                        boxMessage("⊙︿⊙ Volley Error",e.toString());
                     }
                 }
             }
         });
         colapeticiones.add(request);
+    }
+
+    public boolean validacion(){
+        boolean rsp = true;
+        if(binding.etEdituserNombre.getText().toString().equals("") &&
+                binding.etEdituserApellido.getText().toString().equals("") &&
+                binding.etEdituserDireccion.getText().toString().equals("")&&
+                binding.etEdituserNumero.getText().toString().equals("")){
+            rsp = false;
+            boxMessage("Ups (◕︵◕)","Ingrese los datos");
+        }
+        return rsp;
     }
 
     public void boxMessage(String titulo, String mensaje) {

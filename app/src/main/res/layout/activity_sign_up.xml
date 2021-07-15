@@ -8,7 +8,7 @@
     android:background="#171B40">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ly_pedido_datosenvio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/container"
@@ -150,7 +150,7 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="356dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/ly_pedido_datosenvio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
