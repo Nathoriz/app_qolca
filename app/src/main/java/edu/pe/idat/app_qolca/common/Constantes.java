@@ -30,11 +30,15 @@ public class Constantes {
     public static final String URL_API_CARRITOPRODUCTOS_DELETE="http://"+ipv+":8050/carritoproducto/eliminar/";
     public static final String URL_API_CARRITOPRODUCTOS_DELETE_ALL="http://"+ipv+":8050/carritoproducto/eliminar/usuario/";
 
+    public static final String URL_API_PEDIDO_COMPRAR="http://"+ipv+":8050/pedido/comprar?";
+    public static final String URL_API_PEDIDO_PAGAR="http://"+ipv+":8050/pedido/pagar/";
+    public static final String URL_API_PEDIDO_COMPRAR_TODO="http://"+ipv+":8050/pedido/comprartodo";
+
     public static final String URL_API_PEDIDO_ID="http://"+ipv+":8050/pedido/obtener/";
     public static final String URL_API_PEDIDO_USUARIO="http://"+ipv+":8050/pedido/usuario/";
-    public static final String URL_API_PEDIDO_COMPRAR="http://"+ipv+":8050/pedido/comprar?";
-    public static final String URL_API_PEDIDO_COMPRAR_TODO="http://"+ipv+":8050/pedido/comprartodo";
     public static final String URL_API_PEDIDO_DELETE="http://"+ipv+":8050/pedido/eliminar/";
+
+    public static final String URL_API_DETPED_LISTAR_PEDIDO="http://"+ipv+":8050/detallepedido/listar/pedido/";
 
     public static final String PREF_ID="PREF_ID";
     public static final String PREF_NOMBRE="PREF_NOMBRE";

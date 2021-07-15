@@ -16,4 +16,5 @@
     <string name="tv_confirmar_contrasenia">Confirmar contraseña</string>
     <string name="tv_load">Loading</string>
     <string name="tv_cantidad">Cant.</string>
+    <string name="tv_title_detallepedido">Pedido</string>
 </resources>

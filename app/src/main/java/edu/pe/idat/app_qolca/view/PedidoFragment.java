@@ -249,6 +249,7 @@ public class PedidoFragment extends Fragment {
         parametros.put("fecha",dtf.format(LocalDateTime.now()));
         parametros.put("total",binding.tvPedidoTotal.getText().toString());
         parametros.put("usuario",jsonUsuario);
+        parametros.put("estado","EN PROCESO");
 
         JSONObject jsonObjectParametro = new JSONObject(parametros);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -260,7 +261,10 @@ public class PedidoFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getString("message").equals("ok")){
-                               borrarProductosCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DELETE_ALL+id_user);
+                                clear();
+                                Intent intent = new Intent(getContext(),PagoCardioActivity.class);
+                                intent.putExtra("idpedido",response.getInt("id"));
+                                startActivity(intent);
                             }
                         } catch (JSONException ex) {
                             boxMessage("⊙︿⊙",ex.toString());
@@ -281,52 +285,11 @@ public class PedidoFragment extends Fragment {
                         e.printStackTrace();
                         boxMessage("⊙︿⊙",e.toString());
                     }
-
                 }
             }
         }
         );
         colapeticiones.add(request);
-    }
-
-    private void borrarProductosCarrito(String url){
-        RequestQueue colaPeticiones = Volley.newRequestQueue(getContext());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if(response.getString("message").equals("ok")){
-                                clear();
-                                // REDIRIGIR A LA PANTALLA DE PAGO
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            boxMessage("⊙︿⊙ -",e.toString());
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.data != null) {
-                            byte[] datos = networkResponse.data;
-                            try {
-                                JSONObject testV=new JSONObject(new String(datos));
-                                boxMessage("Ups (◕︵◕)",testV.getString("message"));
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                boxMessage("⊙︿⊙",e.toString());
-                            }
-                        }
-                    }
-                });
-        colaPeticiones.add(jsonObjectRequest);
     }
 
     private void crearPedidoComprar(String url){
@@ -338,6 +301,7 @@ public class PedidoFragment extends Fragment {
         parametros.put("fecha",dtf.format(LocalDateTime.now()));
         parametros.put("total",binding.tvPedidoTotal.getText().toString());
         parametros.put("usuario",jsonUsuario);
+        parametros.put("estado","EN PROCESO");
 
         JSONObject jsonObjectParametro = new JSONObject(parametros);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -349,8 +313,10 @@ public class PedidoFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getString("message").equals("ok")){
-                                //REDIRIGIR A LA VISTA DE PAGO
-                                boxMessage("O.O","Si compra un producto");
+                                clear();
+                                Intent intent = new Intent(getContext(),PagoCardioActivity.class);
+                                intent.putExtra("idpedido",response.getInt("id"));
+                                startActivity(intent);
                             }
                         } catch (JSONException ex) {
                             boxMessage("⊙︿⊙",ex.toString());
@@ -374,8 +340,7 @@ public class PedidoFragment extends Fragment {
 
                 }
             }
-        }
-        );
+        });
         colapeticiones.add(request);
     }
 
