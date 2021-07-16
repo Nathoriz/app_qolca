@@ -298,12 +298,14 @@ public class CartFragment extends Fragment implements CarritoProductoAdapter.Rec
     public void itemClick(CarritoProducto cp, ImageView img, CartCardBinding cardBinding) {
         if(String.valueOf(img.getId()).equals("2131362029")){
             eliminarProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DELETE + cp.getId(),cardBinding);
-        }else if(String.valueOf(img.getId()).equals("2131362326")){
+        }else if(String.valueOf(img.getId()).equals("2131362048")){
+//            boxMessage("inc",String.valueOf(img.getId()));
             incrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_INCREMENTAR + cp.getId(),cardBinding);
-        }else if(String.valueOf(img.getId()).equals("2131362030")){
+        }else if(String.valueOf(img.getId()).equals("2131362046")){
+//            boxMessage("dec",String.valueOf(img.getId()));
             decrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DECREMENTAR + cp.getId(),cardBinding);
         }else{
-//            boxMessage("O.O",String.valueOf(img.getId()));
+            boxMessage("O.O",String.valueOf(img.getId()));
         }
     }
 }

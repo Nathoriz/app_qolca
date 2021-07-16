@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -47,10 +48,13 @@ public class PagoCardioActivity extends AppCompatActivity {
     private static final int SCAN_RESULT = 100;
     private int id_pedido;
     private double total;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+
         binding = ActivityPagoCardioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         id_pedido =getIntent().getIntExtra("idpedido",0);
@@ -67,7 +71,50 @@ public class PagoCardioActivity extends AppCompatActivity {
             binding.btnPagar.setOnClickListener(view->{
                 pedidoPagado(Constantes.URL_API_PEDIDO_PAGAR+id_pedido);
             });
+            binding.ivClose.setOnClickListener(view->{
+                eliminarPedido(Constantes.URL_API_PEDIDO_DELETE + id_pedido);
+            });
         }
+    }
+
+    private void eliminarPedido(String url) {
+        RequestQueue colaPeticiones = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getString("message").equals("ok")){
+                                boxMessage("O_O","Su pedido se canceló");
+                                Intent intent = new Intent(context,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            boxMessage("⊙︿⊙ -",e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null && networkResponse.data != null) {
+                            byte[] datos = networkResponse.data;
+                            try {
+                                JSONObject testV=new JSONObject(new String(datos));
+                                boxMessage("Ups (◕︵◕)",testV.getString("message"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                boxMessage("⊙︿⊙",e.toString());
+                            }
+                        }
+                    }
+                });
+        colaPeticiones.add(jsonObjectRequest);
     }
 
     private void scanearTarjeta(){
@@ -104,7 +151,6 @@ public class PagoCardioActivity extends AppCompatActivity {
                     binding.cvTarjeta.setVisibility(View.VISIBLE);
                 }
             }else{
-                boxMessage("Ups","Al parecer ocurrio un problema, vuelva a intentarlo");
                 binding.btnPagar.setVisibility(View.GONE);
                 binding.rvDetallepedido.setVisibility(View.GONE);
                 binding.tvPagoTitulo.setVisibility(View.GONE);
@@ -250,6 +296,8 @@ public class PagoCardioActivity extends AppCompatActivity {
                         try {
                             if(response.getString("message").equals("ok")){
                                 boxMessage("OwO","Gracias por su compra");
+                                Intent intent = new Intent(context,MainActivity.class);
+                                startActivity(intent);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

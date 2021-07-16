@@ -7,6 +7,15 @@
     android:padding="32dp"
     tools:context=".view.PagoCardioActivity">
 
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+        app:tint="@color/blue_dark" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_tarjeta"
         android:layout_width="300dp"
@@ -122,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_button"
-        android:text="Pagar S/0.00"
+        android:text="Pagar S/ "
         android:textColor="@color/blue_dark"
         android:textStyle="bold"
         android:visibility="gone"
@@ -154,5 +163,5 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_close" />
 </androidx.constraintlayout.widget.ConstraintLayout>

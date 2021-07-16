@@ -15,17 +15,19 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".view.PagoCardioActivity"></activity>
         <activity android:name=".view.SignUpActivity"></activity>
-        <activity android:name=".view.LoginActivity"></activity>
-        <activity android:name=".view.SplashActivity"></activity>
-        <activity
-            android:name=".view.MainActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
+        <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.SplashActivity"></activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan">
+
         </activity> <!-- Para que el bottom navigation no suba en los edit text android:windowSoftInputMode="adjustPan" -->
         <meta-data
             android:name="preloaded_fonts"
