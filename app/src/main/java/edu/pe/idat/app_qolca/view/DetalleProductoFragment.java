@@ -133,6 +133,7 @@ public class DetalleProductoFragment extends Fragment {
         binding.tvDetailproductMarca.setText(producto.getMarca());
         binding.tvDetailproductPrecio.setText(String.valueOf(producto.getPrecio()));
         Glide.with(getContext()).load(producto.getImagen()).into(binding.ivDetailproductImg);
+        binding.tvDetailproductStock.setText(binding.tvDetailproductStock.getText().toString() + producto.getStock());
     }
 
     private void incrementCantidad(){

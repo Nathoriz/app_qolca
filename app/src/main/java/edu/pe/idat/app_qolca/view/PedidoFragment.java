@@ -262,6 +262,7 @@ public class PedidoFragment extends Fragment {
                         try {
                             if(response.getString("message").equals("ok")){
                                 clear();
+                                adapter.clearlist();
                                 Intent intent = new Intent(getContext(),PagoCardioActivity.class);
                                 intent.putExtra("idpedido",response.getInt("id"));
                                 startActivity(intent);
@@ -314,6 +315,7 @@ public class PedidoFragment extends Fragment {
                         try {
                             if(response.getString("message").equals("ok")){
                                 clear();
+                                adapter.clearlist();
                                 Intent intent = new Intent(getContext(),PagoCardioActivity.class);
                                 intent.putExtra("idpedido",response.getInt("id"));
                                 startActivity(intent);

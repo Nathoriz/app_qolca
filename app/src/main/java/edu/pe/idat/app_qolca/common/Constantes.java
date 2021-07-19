@@ -34,9 +34,9 @@ public class Constantes {
     public static final String URL_API_PEDIDO_PAGAR="http://"+ipv+":8050/pedido/pagar/";
     public static final String URL_API_PEDIDO_COMPRAR_TODO="http://"+ipv+":8050/pedido/comprartodo";
 
-    public static final String URL_API_PEDIDO_ID="http://"+ipv+":8050/pedido/obtener/";
-    public static final String URL_API_PEDIDO_USUARIO="http://"+ipv+":8050/pedido/usuario/";
     public static final String URL_API_PEDIDO_DELETE="http://"+ipv+":8050/pedido/eliminar/";
+//    public static final String URL_API_PEDIDO_ID="http://"+ipv+":8050/pedido/obtener/";
+//    public static final String URL_API_PEDIDO_USUARIO="http://"+ipv+":8050/pedido/usuario/";
 
     public static final String URL_API_DETPED_LISTAR_PEDIDO="http://"+ipv+":8050/detallepedido/listar/pedido/";
 

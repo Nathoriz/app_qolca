@@ -63,6 +63,12 @@ public class PedidoProductoAdapter extends RecyclerView.Adapter<PedidoProductoAd
         }
     }
 
+
+    public void clearlist(){
+        list.clear();
+        notifyDataSetChanged();
+    }
+
     public void addPedidoProducto(ArrayList<PedidoProducto> data){
         list.clear();
         list.addAll(data);

@@ -125,6 +125,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     public void itemClick(Producto p) {
         Bundle bundle = new Bundle();
         bundle.putInt("idproduct", p.getId());
+
         getParentFragmentManager().setFragmentResult("ID", bundle);
 
         DetalleProductoFragment fragment = new DetalleProductoFragment();

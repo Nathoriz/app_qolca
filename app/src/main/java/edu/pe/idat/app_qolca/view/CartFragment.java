@@ -300,12 +300,14 @@ public class CartFragment extends Fragment implements CarritoProductoAdapter.Rec
             eliminarProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DELETE + cp.getId(),cardBinding);
         }else if(String.valueOf(img.getId()).equals("2131362048")){
 //            boxMessage("inc",String.valueOf(img.getId()));
-            incrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_INCREMENTAR + cp.getId(),cardBinding);
+            if(Integer.valueOf(cardBinding.tvCartCantidad.getText().toString()) == cp.getProducto().getStock()){
+            }else{ incrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_INCREMENTAR + cp.getId(),cardBinding); }
         }else if(String.valueOf(img.getId()).equals("2131362046")){
 //            boxMessage("dec",String.valueOf(img.getId()));
-            decrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DECREMENTAR + cp.getId(),cardBinding);
+            if(Integer.valueOf(cardBinding.tvCartCantidad.getText().toString()) <= 1){
+            } else{ decrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DECREMENTAR + cp.getId(),cardBinding);}
         }else{
-            boxMessage("O.O",String.valueOf(img.getId()));
+//            boxMessage("O.O",String.valueOf(img.getId()));
         }
     }
 }
