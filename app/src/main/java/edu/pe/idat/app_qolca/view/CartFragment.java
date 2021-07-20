@@ -296,14 +296,12 @@ public class CartFragment extends Fragment implements CarritoProductoAdapter.Rec
 
     @Override
     public void itemClick(CarritoProducto cp, ImageView img, CartCardBinding cardBinding) {
-        if(String.valueOf(img.getId()).equals("2131362029")){
+        if(img.getId() == cardBinding.ivCartBorrar.getId() ){
             eliminarProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DELETE + cp.getId(),cardBinding);
-        }else if(String.valueOf(img.getId()).equals("2131362048")){
-//            boxMessage("inc",String.valueOf(img.getId()));
+        }else if(img.getId() == cardBinding.ivCartIncrementar.getId() ){
             if(Integer.valueOf(cardBinding.tvCartCantidad.getText().toString()) == cp.getProducto().getStock()){
             }else{ incrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_INCREMENTAR + cp.getId(),cardBinding); }
-        }else if(String.valueOf(img.getId()).equals("2131362046")){
-//            boxMessage("dec",String.valueOf(img.getId()));
+        }else if(img.getId() == cardBinding.ivCartDecrementar.getId() ){
             if(Integer.valueOf(cardBinding.tvCartCantidad.getText().toString()) <= 1){
             } else{ decrementarCantidadProductoCarrito(Constantes.URL_API_CARRITOPRODUCTOS_DECREMENTAR + cp.getId(),cardBinding);}
         }else{

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.pe.idat.app_qolca.databinding.DetallePedidoCardBinding;
@@ -35,12 +36,13 @@ public class DetallePedidoAdapter  extends RecyclerView.Adapter<DetallePedidoAda
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        DecimalFormat df = new DecimalFormat("#.00");
         final DetallePedido item = list.get(position);
         holder.recyclerBinding.tvDetpedMarca.setText(item.getProducto().getMarca());
         holder.recyclerBinding.tvDetpedNombre.setText(item.getProducto().getNombre());
         holder.recyclerBinding.tvDetpedPrecio.setText(String.valueOf(item.getProducto().getPrecio()));
         holder.recyclerBinding.tvDetpedCantidad.setText(String.valueOf(item.getCantidad()));
-        holder.recyclerBinding.tvDetpedTotal.setText(String.valueOf(item.getTotal()));
+        holder.recyclerBinding.tvDetpedTotal.setText(df.format(item.getTotal()));
     }
 
     @Override
